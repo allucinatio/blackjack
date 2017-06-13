@@ -10,45 +10,36 @@
 */
 
 // establish my hand as an array
-var myHand = ['7', 'J', '5'];
+var myHand = ['7', 'A', 'A', 'A'];
 
 function handValue (hand) {
-var hasAce = 0;
-// console.log("--------------");
-// console.log("hand initial: ", hand);
+  var hasAce = 0;
 
-  // convert card strings to integers, except Aces
+  // convert card array's strings to integers, except Aces
   for (var i = 0; i < hand.length; i++) {
     if (hand[i] === 'K' || hand[i] === 'Q' || hand[i] === 'J') {
       hand[i] = 10;
-    } else if (hand[i] === 'A'){
+    } else if (hand[i] === 'A') {
       hasAce += 1;
       hand[i] = 0;
-      // console.log("was ace removed? ", hand)
     } else {
       hand[i] = parseInt(hand[i]);
     }
   }
 
-  // add hand together
-  // console.log("do I have an Ace?", hasAce)
-  // console.log("hand after conversion: ", hand);
+  // add hand array together into one integer
   hand = hand.reduce((a, b) => a + b, 0);
-  // console.log("hand after sum: ", hand);
 
-  // now, deal with Aces being 1 or 11 now that we know the hand total
+  // now, deal with Aces being either 1 or 11 now that we know the hand total
   while (hasAce >= 1) {
     if (hand <= 10) {
       hand = hand + 11;
-      // console.log("Made Ace an 11");
       hasAce--;
     } else {
       hand = hand + 1;
-      // console.log("Made Ace a 1");
       hasAce--;
     }
   }
-
   return hand;
 }
 
